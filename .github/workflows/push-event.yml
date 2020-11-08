@@ -37,7 +37,7 @@ jobs:
       env:
         HEROKU_TOKEN: ${{ secrets.HEROKU_OAUTH }}
 
-      if: github.ref == 'refs/heads/master' && job.status == 'success'
+      if: github.ref == 'refs/heads/main' && job.status == 'success'
       run: |
         git remote add heroku https://heroku:$HEROKU_TOKEN@git.heroku.com/medical-rec.git
         git push heroku HEAD:master -f
