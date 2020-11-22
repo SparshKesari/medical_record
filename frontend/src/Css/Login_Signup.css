@@ -1,0 +1,58 @@
+
+.signup
+{
+  margin-top: 4% !important;
+
+}
+.login
+{
+  margin-top: 5% !important;
+}
+
+
+.border
+{
+  border:thin rgb(238, 239, 240) solid !important;
+  margin:20px;
+  padding:20px;
+}
+.form-back
+{
+  border-radius: 8px;
+  /* background-image: linear-gradient(to right,rgb(240, 241, 241),rgb(255, 255, 255)); */
+  background-color: rgb(253,253,253);
+}
+.shadow {
+  /* -webkit-box-shadow: -6px 5px 15px 4px rgba(180, 180, 180, 0.81) !important;
+  box-shadow: -6px 2px 10px 4px rgba(153, 148, 148, 0.81) !important; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.img1
+{
+  width:100% !important;
+  height:100% !important
+}
+
+@media (max-width: 900px){
+    .signup
+    {
+      margin-top: 10% !important;
+    
+    }
+    .login
+    {
+      margin-top: 10% !important;
+    }
+}
+@media (max-width: 400px){
+    .signup
+    {
+      margin-top: 15% !important;
+    
+    }
+    .login
+    {
+      margin-top: 20% !important;
+    }
+}
+
