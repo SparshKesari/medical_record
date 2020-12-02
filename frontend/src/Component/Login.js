@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import img from '../Assets/Login_Signup-01.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Css/Login_Signup.css';
+import fire from '../fire.js';
 
 function Login() {
 	const [email, setEmail] = useState("");
@@ -13,6 +14,11 @@ function Login() {
 		console.log(email)
 		event.preventDefault();
 		alert("The form is summited")
+		fire.auth().signInWithEmailAndPassword(email, password)
+    .catch((error) => {
+      console.error('Incorrect username or password');
+    });
+  
 	  }
 	  function validateForm() {
 		return (email.includes('@') && email.length >8) && password.length > 3;
@@ -48,7 +54,7 @@ function Login() {
 							<Form.Check type="checkbox" label="Remember Me!" />
 						</Form.Group>
 						<div className="d-flex justify-content-center">
-							<Button className="mb-3"  type="submit"  disabled={!validateForm()}>
+							<Button className="mb-3"  type="submit" enabled={!validateForm()}>
 								Submit
 							</Button>
 						</div>

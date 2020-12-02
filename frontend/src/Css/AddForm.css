@@ -1,0 +1,144 @@
+.add-form::before{
+	content: '\A';
+	position: fixed;
+	overflow: auto;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-image: url('../Assets/syringe-1884784.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	background-size: cover;
+	 -webkit-filter: blur(3px);
+	-moz-filter: blur(3px);
+	filter: blur(1px);
+	z-index: -1;
+}
+.add-form .prescription{
+	font-weight: 500;
+	text-transform: uppercase;
+	/* font-family: 'raleway', sans-serif; */
+}
+.add-form .prescription::after{
+	content: '\A';
+	position: absolute;
+	background-color: rgba(37, 37, 37, 0.3);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 8%;
+	z-index: -1;
+	border-top-right-radius: 1rem;
+	border-top-left-radius: 1rem;
+}
+
+.add-form .layout
+{
+	margin:auto;
+	width:65%;
+	/* position: absolute; */
+	/* position: relative; */
+	/* overflow: auto; */
+	/* padding-top: 100px; */
+	margin: 50px auto;
+}
+@media only screen and (max-width:1024px)
+{
+	.layout{
+		margin:auto;
+		width:90%
+	}
+}
+.add-form .container
+{
+
+	z-index: 999;
+
+}
+.add-form .text-center
+{
+	color:rgb(255, 255, 255);
+	font-family: 'Raleway', sans-serif;
+}
+.add-form .form-label
+{
+   font-size: 1.2rem;
+   /* color:rgb(2, 58, 83); */
+   color:rgb(255, 255, 255)
+}
+.add-form .form-text
+{
+	font-size: medium;
+}
+.add-form .form-layout
+{
+
+	/* border: rgb(19, 19, 241) solid !important; */
+	/* border: rgb(239 239 246) solid !important; */
+	/* background-color:rgba(166 219 235,0.5); */
+	background-color: rgba(37, 37, 37, 0.3);
+	/* background-color: rgba(0,0,0,0.5); */
+	/* background-color:rgba(199, 223, 234, 0.53); */
+	/* background: url('../Assests/background-02-01.svg'); */
+	margin-top:3%;
+	border-radius: 1rem;
+	padding:inherit;
+	position: relative;
+
+	padding: 3%;
+	font-family: 'Nunito', sans-serif;
+
+
+}
+.add-form .form-control
+{
+	border-bottom: 1px solid rgb(3, 36, 80)  !important;
+	/* background-color: snow !important; */
+
+}
+.add-form .box-shadow
+{
+	/* box-shadow: 0 4px 8px 0 rgba(41, 40, 40, 0.2), 0 6px 20px 0 rgba(17, 17, 17, 0.19) !important; */
+	box-shadow: 2px 3.5px 9px 3px rgba(0,0,0,0.2);
+}
+.add-form .delete_img{
+	height: 1.6rem;
+	margin-top: 1.1rem;
+	margin-left: 2rem;
+	transition: 0.2s;
+}
+.add-form .delete_img:hover{
+	transform: scale(1.2);
+}
+.add-form .btn-warning
+{
+
+	background-color: rgb(5, 82, 107) !important;
+	color:white !important;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+	border:thin white !important;
+
+}
+.add-form .btn-warning:hover
+{
+    background-color: rgb(3, 52, 68) !important;
+	color:white !important;
+}
+.add-form button.btn.btn-primary {
+	display: block;
+	margin-top:5%;
+
+	background-color:rgb(3,52,68) !important;
+	color:white !important;
+	border:thin rgb(250, 249, 249) !important;
+	margin-bottom:3%;
+}
+.add-form button.btn.btn-primary:hover{
+
+	color: rgb(231, 233, 236) !important;
+	background-color: rgb(5, 82, 107) !important;
+
+}
