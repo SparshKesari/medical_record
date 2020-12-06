@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import img from '../Assets/Login_Signup-01.svg';
 import '../Css/Login_Signup.css';
+import {Services} from '../Component/Services';
 
 function Signup() {
 	const [name, setName] = useState("");
@@ -12,10 +13,14 @@ function Signup() {
 	const [password, setPassword] = useState("");
 	const [cpassword, setCPassword] = useState("");
 	function validateForm() {
-		return name.length > 3 && (email.includes('@') && email.length > 8) && password.length >= 1 && password === cpassword
+		//return name.length > 3 && (email.includes('@') && email.length > 8) && password.length >= 1 && password === cpassword
 	}
 
 	function handleSubmit() {
+		if (name && email && number && password &&cpassword) {
+			return Services(name,email,number,password);
+		  }
+			//return console.log('You must enter a name and a number');
 		alert("Registration done")
 	}
 
@@ -62,7 +67,7 @@ function Signup() {
 								value={cpassword} onChange={(e) => setCPassword(e.target.cpassword)} />
 						</Form.Group>
 						<div className="d-flex justify-content-center" >
-						<Button variant="primary" className="mb-3" type="submit" disabled={!validateForm()}>
+						<Button variant="primary" className="mb-3" type="submit" enabled={!validateForm()}>
 							Submit
 						</Button>
 						</div>
