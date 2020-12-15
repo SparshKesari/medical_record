@@ -1,36 +1,116 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
-name: push event
+name: CI
 
 on:
   push:
-    branches: [ main ]
-
+  pull_request:
+    types:
+      - opened
+      - synchronize
+  release:
+    types:
+      - created
+        
+defaults:
+  run:
+    working-directory: frontend
+    
 jobs:
-  build:
 
+  # This job will:
+  #   * deploy a draft every time there is a pull request created or synchronized that is not on master branch
+  #   * comment on that pull request with the deploy URL
+  deployPRDraft:
+    name: Deploy draft to Netlify on Pull Request
     runs-on: ubuntu-latest
-
+    if: github.event_name == 'pull_request' && github.ref != 'refs/heads/master'
     steps:
-    - uses: actions/checkout@v2
-    - run: | 
-        git fetch --prune --unshallow
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Checkout repository
+        uses: actions/checkout@v1
 
-    - name: Heroku deploy
-      env:
-        HEROKU_TOKEN: ${{ secrets.HEROKU_OAUTH }}
+      # Build steps for gatsby build
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+          
+        # Install all dependencies
+      - run: npm install
+      
+      # This triggers `gatsby build` script in "package.json"
+      - run: npm run build
 
-      if: github.ref == 'refs/heads/main' && job.status == 'success'
-      run: |
-        git remote add heroku https://heroku:$HEROKU_TOKEN@git.heroku.com/medical-rec.git
-        git push heroku HEAD:master -f
+      - name: Deploy draft to Netlify on PR
+        uses: South-Paw/action-netlify-deploy@v1.0.4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
+          build-dir: './build'
+          draft: true
+          comment-on-pull-request: true
+    
+  # This job will:
+  #   * deploy a draft every time there is a commit that is not on master branch
+  #   * comment on that commit with the deploy URL
+  deployCommitDraft:
+    name: Deploy draft to Netlify on Commit
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref != 'refs/heads/master'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      # Build steps for gatsby build
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+          
+        # Install all dependencies
+      - run: npm install
+      
+      # This triggers `gatsby build` script in "package.json"
+      - run: npm run build
+
+      - name: Deploy draft to Netlify on push
+        uses: South-Paw/action-netlify-deploy@v1.0.4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
+          build-dir: './build'
+          draft: true
+          comment-on-commit: true
+
+
+  # This job will:
+  #   * deploy a production build every time there is a release created on the master branch
+  #   * comment that commit with the deploy URL
+  publishOnMasterRelease:
+    name: Publish release to Netlify
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'created'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      # Build steps for gatsby build
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+          
+        # Install all dependencies
+      - run: npm install
+      
+      # This triggers `gatsby build` script in "package.json"
+      - run: npm run build
+
+      - name: Deploy production to Netlify
+        uses: South-Paw/action-netlify-deploy@v1.0.4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
+          build-dir: './build'
+          
