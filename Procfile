@@ -1,2 +1,2 @@
 web: cd frontend/src
-web: npm start
+web: node index.js
