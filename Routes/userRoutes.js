@@ -49,4 +49,16 @@ router.post('/addform', async(req,res) => {
         console.log(err.message)
     }
 })
+
+router.post('/search', (req, res) => {
+    const email = req.body.email;
+    console.log(email);
+    User.findOne({email})
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
 module.exports = router
