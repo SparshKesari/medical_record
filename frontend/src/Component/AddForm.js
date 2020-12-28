@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 // import img from '../Assests/landing_image-01-01-01.svg'
 import delete_img from '../Assets/delete.svg'
-import { Form, Row, Col, Container, Button, Image } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
+import {useHistory} from 'react-router-dom';
 import '../Css/AddForm.css';
 import axios from 'axios';
 import fire from '../fire.js';
@@ -28,8 +29,7 @@ function AddForm() {
 	const [date, setDate] = useState("");
 	const [doctorType, setDoctorType] = useState("");
 	const [description, setDescription] = useState("");
-
-
+	const history = useHistory();
 	function handleAddFields(e){
 		e.preventDefault();					
 		// setInputObject({
@@ -50,9 +50,9 @@ function AddForm() {
 		setInputFields(currentItems => currentItems.filter((input, index) => index !== i));
 	  }
 
-	function handleSubmit() {
-		alert("Formed Filled Up")
-	}
+	// function handleSubmit() {
+	// 	alert("Formed Filled Up")
+	// }
 	function handleSubmit (e){
 		e.preventDefault();
 		// setInputObject({
@@ -84,6 +84,7 @@ function AddForm() {
 			description: description,
 			medicines: medicinesArray
 		})
+		// history.push('/home');
 	}
 
 	return (
@@ -139,7 +140,7 @@ function AddForm() {
 										 placeholder="No of Days" className="col-sm-3 mr-2 mt-3" />
 									<Form.Control type="number" min="1" onChange= {(e) => setInputObject({mediname: inputObject.mediname, days1: inputObject.days1, perday1 : e.target.value})}
 										 placeholder="Per-Day" className="col-sm-3 mt-3" />
-									<img className="delete_img" src={delete_img} onClick={() => deleteItem(i)}/>
+									<img className="delete_img" src={delete_img} onClick={() => deleteItem(i)} alt = ""/>
 								</Form.Group>
 							</div>))}
 

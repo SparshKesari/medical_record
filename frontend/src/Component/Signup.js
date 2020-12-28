@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Button,Image } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import img from '../Assets/Login_Signup-01.svg';
 import '../Css/Login_Signup.css';
@@ -14,6 +14,7 @@ function Signup() {
 	const [number, setNumber] = useState("");
 	const [password, setPassword] = useState("");
 	const [cpassword, setCPassword] = useState("");
+	const history = useHistory();
 	function validateForm() {
 		//return name.length > 3 && (email.includes('@') && email.length > 8) && password.length >= 1 && password === cpassword
 	}
@@ -27,6 +28,7 @@ function Signup() {
 					email: email,
 					number: number
 				})
+				history.push('/home')
 			})
 			.catch((error) => {
 				var errorCode = error.code;
