@@ -53,7 +53,7 @@ router.post('/addform', async(req,res) => {
 router.post('/search', (req, res) => {
     const email = req.body.email;
     console.log(email);
-    User.findOne({email})
+    User.find({email})
         .then(data => {
             res.json(data);
         })

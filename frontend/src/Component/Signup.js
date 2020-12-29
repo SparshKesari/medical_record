@@ -61,7 +61,7 @@ function Signup() {
 								We'll never share your email with anyone else.
 		  					</Form.Text>
 						</Form.Group>
-						<Form.Group controlId="formBasicEmail">
+						<Form.Group controlId="formBasicNumber">
 							<Form.Label>Phone Number</Form.Label>
 							<Form.Control type="telnum" placeholder="Enter Number"
 								value={number} onChange={(e) => setNumber(e.target.value)} />
@@ -74,13 +74,13 @@ function Signup() {
 							<Form.Control type="password" placeholder="Password"
 								value={password} onChange={(e) => setPassword(e.target.value)} />
 						</Form.Group>
-						<Form.Group controlId="formBasicPassword">
+						<Form.Group controlId="formBasicCPassword">
 							<Form.Label>Confirm Password</Form.Label>
 							<Form.Control type="password" placeholder="Password"
 								value={cpassword} onChange={(e) => setCPassword(e.target.value)} />
 						</Form.Group>
 						<div className="d-flex justify-content-center" >
-						<Button variant="primary" className="mb-3" type="submit" enabled={!validateForm()}>
+						<Button controlId="formButton" variant="primary" className="mb-3" type="submit" enabled={!validateForm()}>
 							Submit
 						</Button>
 						</div>
