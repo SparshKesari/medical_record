@@ -10,9 +10,6 @@ on:
     types:
       - created
         
-defaults:
-  run:
-    working-directory: backend
     
 jobs:
 
