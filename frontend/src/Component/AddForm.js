@@ -1,35 +1,90 @@
 import React, { useState } from 'react'
 // import img from '../Assests/landing_image-01-01-01.svg'
 import delete_img from '../Assets/delete.svg'
-import { Form, Row, Col, Container, Button, Image } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
+import {useHistory} from 'react-router-dom';
 import '../Css/AddForm.css';
+import axios from 'axios';
+import fire from '../fire.js';
 
 
+const url = 'http://localhost:8080/api/addform'
 
 function AddForm() {
 
-	const [inputFields, setInputFields] = useState([
-		{ medicineName: '', days: null, perday: null },
-	]);
+	const [medicineName, setMedicineName] = useState('')
+	const [days, setDays] = useState('')
+	const [perday, setPerday] = useState('')
+	
+	const [inputFields, setInputFields] = useState([]);
+	const [inputObject, setInputObject] = useState({
+		mediname: '',
+		days1: '',
+		perday1: ''
+	});
+	const [medicinesArray, setMedicinesArray] = useState([]);
 
 	const [doctorName, setDoctorName] = useState("");
 	const [diseaseName, setDiseaseName] = useState("");
 	const [date, setDate] = useState("");
 	const [doctorType, setDoctorType] = useState("");
 	const [description, setDescription] = useState("");
-
-
-	const handleAddFields = (e) => {
-		e.preventDefault();
-		setInputFields([...inputFields, { medicineName: '', days: null, perday: null }])
+	const history = useHistory();
+	function handleAddFields(e){
+		e.preventDefault();					
+		// setInputObject({
+		// 	medicinename : medicineName,
+		// 	days: days,
+		// 	perday: perday
+		// })
+		if(inputObject.mediname != ''){
+			console.log('1', inputObject)
+			setMedicinesArray(medicinesArray => [...medicinesArray, inputObject])
+			console.log('2', medicinesArray)
+			setInputFields([...inputFields, { medicineName: '', days: '', perday: '' }])
+		}else{
+			setInputFields([...inputFields, { medicineName: medicineName, days: days, perday: perday }])
+		}	
 	}
 	const deleteItem = (i) => {
-		
 		setInputFields(currentItems => currentItems.filter((input, index) => index !== i));
 	  }
 
-	function handleSubmit() {
-		alert("Formed Filled Up")
+	// function handleSubmit() {
+	// 	alert("Formed Filled Up")
+	// }
+	function handleSubmit (e){
+		e.preventDefault();
+		// setInputObject({
+		// 	medicinename : medicineName,
+		// 	days: days,
+		// 	perday: perday
+		// })
+		medicinesArray.push(inputObject);
+		console.log(medicinesArray)
+		var user = fire.auth().currentUser;
+			if (user != null){
+				var email1 = user.email
+			}
+		// const medicines = {
+		// 	email: email1,
+		// 	doctorName: doctorName,
+		// 	diseaseName: diseaseName,
+		// 	date: date,
+		// 	doctype: doctorType,
+		// 	description: description,
+		// 	medicines: medicinesArray
+		// }
+		axios.post(url, {
+			email: email1,
+			doctorName: doctorName,
+			diseaseName: diseaseName,
+			date: date,
+			doctype: doctorType,
+			description: description,
+			medicines: medicinesArray
+		})
+		// history.push('/home');
 	}
 
 	return (
@@ -76,14 +131,16 @@ function AddForm() {
 							<Form.Label>Add photo of Prescription</Form.Label>
 							<Form.Control type="file" />
 						</Form.Group>
-
 						{inputFields.map((input,i) => (
 							<div >
 								<Form.Group className="form-inline" key={i}>
-									<Form.Control type="text" placeholder="Medicine Name" className="col-sm-4 mr-2 mt-3" />
-									<Form.Control type="number" min="1"  placeholder="No of Days" className="col-sm-3 mr-2 mt-3" />
-									<Form.Control type="number" min="1"  placeholder="Per-Day" className="col-sm-3 mt-3" />
-									<img className="delete_img" src={delete_img} onClick={() => deleteItem(i)}/>
+									<Form.Control type="text" onChange= {(e) => setInputObject({mediname : e.target.value})}
+										 placeholder="Medicines Name" className="col-sm-4 mr-2 mt-3" />
+									<Form.Control type="number" min="1" onChange= {(e) => setInputObject({mediname: inputObject.mediname, days1 : e.target.value})}
+										 placeholder="No of Days" className="col-sm-3 mr-2 mt-3" />
+									<Form.Control type="number" min="1" onChange= {(e) => setInputObject({mediname: inputObject.mediname, days1: inputObject.days1, perday1 : e.target.value})}
+										 placeholder="Per-Day" className="col-sm-3 mt-3" />
+									<img className="delete_img" src={delete_img} onClick={() => deleteItem(i)} alt = ""/>
 								</Form.Group>
 							</div>))}
 

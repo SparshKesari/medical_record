@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Button , Image } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import img from '../Assets/Login_Signup-01.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Css/Login_Signup.css';
@@ -9,16 +9,25 @@ import fire from '../fire.js';
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const history = useHistory()
 
 	function handleSubmit(event) {
 		console.log(email)
 		event.preventDefault();
-		alert("The form is summited")
-		fire.auth().signInWithEmailAndPassword(email, password)
-    .catch((error) => {
-      console.error('Incorrect username or password');
-    });
-  
+
+			fire.auth().signInWithEmailAndPassword(email, password).then((u) => {
+				// Axios.post("/userdetails", {
+					
+				// })
+				console.log("succesfully signed in")
+				history.push("/home")
+			})
+			.catch((err) => {
+				console.log("error occured")
+			})
+			
+		
+		
 	  }
 	  function validateForm() {
 		return (email.includes('@') && email.length >8) && password.length > 3;

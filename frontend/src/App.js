@@ -18,8 +18,6 @@ function App() {
     fire.auth().onAuthStateChanged((user) => {
       return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
   });
-  
-  console.log('logged in?', isLoggedIn);
   return (
     <>
       <NavBar/>

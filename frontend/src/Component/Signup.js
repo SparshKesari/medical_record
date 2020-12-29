@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Form, Button,Image } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import img from '../Assets/Login_Signup-01.svg';
 import '../Css/Login_Signup.css';
-import {Services} from '../Component/Services';
+import Axios from 'axios';
+import fire from '../fire.js';
+const url = 'http://localhost:8080/api/signup';
 
 function Signup() {
 	const [name, setName] = useState("");
@@ -12,18 +14,29 @@ function Signup() {
 	const [number, setNumber] = useState("");
 	const [password, setPassword] = useState("");
 	const [cpassword, setCPassword] = useState("");
+	const history = useHistory();
 	function validateForm() {
 		//return name.length > 3 && (email.includes('@') && email.length > 8) && password.length >= 1 && password === cpassword
 	}
-
-	function handleSubmit() {
-		if (name && email && number && password &&cpassword) {
-			return Services(name,email,number,password);
-		  }
-			//return console.log('You must enter a name and a number');
-		alert("Registration done")
-	}
-
+	function handleSubmit(event) {
+		event.preventDefault();
+		fire.auth().createUserWithEmailAndPassword(email, password)
+			.then(() => {
+				console.log('user created succesfully')				
+				Axios.post(url, {
+					name: name,
+					email: email,
+					number: number
+				})
+				history.push('/home')
+			})
+			.catch((error) => {
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				console.log(errorCode)
+				console.log(errorMessage)
+			});
+		}
 
 	return (
 		<div className="signup_up">
@@ -51,7 +64,7 @@ function Signup() {
 						<Form.Group controlId="formBasicEmail">
 							<Form.Label>Phone Number</Form.Label>
 							<Form.Control type="telnum" placeholder="Enter Number"
-								value={number} onChange={(e) => setNumber(e.target.number)} />
+								value={number} onChange={(e) => setNumber(e.target.value)} />
 							<Form.Text className="text-muted">
 								We'll never share your phone number with anyone else.
 		  					</Form.Text>
@@ -59,12 +72,12 @@ function Signup() {
 						<Form.Group controlId="formBasicPassword">
 							<Form.Label>Password</Form.Label>
 							<Form.Control type="password" placeholder="Password"
-								value={password} onChange={(e) => setPassword(e.target.password)} />
+								value={password} onChange={(e) => setPassword(e.target.value)} />
 						</Form.Group>
 						<Form.Group controlId="formBasicPassword">
 							<Form.Label>Confirm Password</Form.Label>
 							<Form.Control type="password" placeholder="Password"
-								value={cpassword} onChange={(e) => setCPassword(e.target.cpassword)} />
+								value={cpassword} onChange={(e) => setCPassword(e.target.value)} />
 						</Form.Group>
 						<div className="d-flex justify-content-center" >
 						<Button variant="primary" className="mb-3" type="submit" enabled={!validateForm()}>
