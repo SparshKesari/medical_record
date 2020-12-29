@@ -32,10 +32,10 @@ jobs:
           
         # Install all dependencies
       - run: npm install
-      
+      - run: pwd    
       # This triggers `gatsby build` script in "package.json"
       - run: npm run build
-
+  
       - name: Deploy draft to Netlify on PR
         uses: South-Paw/action-netlify-deploy@v1.0.4
         with:
@@ -65,7 +65,7 @@ jobs:
           
         # Install all dependencies
       - run: npm install
-      
+      - run: pwd
       # This triggers `gatsby build` script in "package.json"
       - run: npm run build
 
@@ -99,7 +99,7 @@ jobs:
           
         # Install all dependencies
       - run: npm install
-      
+      - run: pwd
       # This triggers `gatsby build` script in "package.json"
       - run: npm run build
 
