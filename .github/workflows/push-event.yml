@@ -67,7 +67,7 @@ jobs:
       - run: cd ./frontend && npm install
       - run: cd ./frontend && pwd
       # This triggers `gatsby build` script in "package.json"
-      - run: cd ./frontend && npm install --save
+#       - run: cd ./frontend && npm install --save
       - run: cd ./frontend && npm run build
 
       - name: Deploy draft to Netlify on push
@@ -80,14 +80,14 @@ jobs:
           draft: true
           comment-on-commit: true
  
-      - name: Checkout repository
-        uses: actions/checkout@v1
+#       - name: Checkout repository
+#         uses: actions/checkout@v1
 
-      # Build steps for gatsby build
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
+#       # Build steps for gatsby build
+#       - name: Setup Node
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: "12.x"
 
         # Install all dependencies
         #- run: cd frontend
