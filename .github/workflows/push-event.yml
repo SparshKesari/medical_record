@@ -64,11 +64,10 @@ jobs:
           node-version: "12.x"
           
         # Install all dependencies
-      - working-directory: ./frontend
-      - run: npm install
-      - run: pwd
+      - run: cd ./frontend && npm install
+      - run: cd ./frontend && pwd
       # This triggers `gatsby build` script in "package.json"
-      - run: npm run build
+      - run: cd ./frontend && npm run build
 
       - name: Deploy draft to Netlify on push
         uses: South-Paw/action-netlify-deploy@v1.0.4
@@ -91,7 +90,6 @@ jobs:
 
         # Install all dependencies
         #- run: cd frontend
-      - working-directory: ..
       - run: npm install
       - run: pwd
       # This triggers `gatsby build` script in "package.json"
@@ -126,11 +124,10 @@ jobs:
           node-version: "12.x"
           
         # Install all dependencies
-      - working-directory: ./frontend
-      - run: npm install
-      - run: pwd
+      - run: cd ./frontend && npm install
+      - run: cd ./frontend && pwd
       # This triggers `gatsby build` script in "package.json"
-      - run: npm run build
+      - run: cd ./frontend && npm run build
 
       - name: Deploy production to Netlify
         uses: South-Paw/action-netlify-deploy@v1.0.4
@@ -150,7 +147,6 @@ jobs:
           node-version: "12.x"
           
         # Install all dependencies
-      - working-directory: ..
       - run: npm install
       - run: pwd
       # This triggers `gatsby build` script in "package.json"
