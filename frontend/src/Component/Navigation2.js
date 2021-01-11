@@ -14,8 +14,8 @@ function Navigation_Bar() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ml-auto">
-                            <Nav.Link href="/login">Login</Nav.Link>
-                            <Nav.Link href="/signup">SignUp</Nav.Link>
+                            <Nav.Link><NavLink to="/home">Home</NavLink></Nav.Link>
+                            <Nav.Link><NavLink to="/add">Add</NavLink></Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

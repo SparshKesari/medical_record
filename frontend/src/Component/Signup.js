@@ -6,6 +6,7 @@ import img from '../Assets/Login_Signup-01.svg';
 import '../Css/Login_Signup.css';
 import Axios from 'axios';
 import fire from '../fire.js';
+import Navigation from './Navigation';
 const url = 'http://localhost:8080/api/signup';
 
 function Signup() {
@@ -39,6 +40,8 @@ function Signup() {
 		}
 
 	return (
+		<>
+		<Navigation />
 		<div className="signup_up">
 		<div className="container signup">
 			<div className="row justify-content-center border-class form-back border shadow">
@@ -90,6 +93,7 @@ function Signup() {
 			</div>
 		</div>
 		</div>
+		</>
 	)
 }
 
