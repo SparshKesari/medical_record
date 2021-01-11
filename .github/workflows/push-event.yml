@@ -33,6 +33,7 @@ jobs:
         # Install all dependencies
       - run: cd frontend
       - run: npm install
+      - run: npm install webpack
       - run: pwd    
       # This triggers `gatsby build` script in "package.json"
       - run: npm run build
@@ -67,6 +68,7 @@ jobs:
         # Install all dependencies
       - run: cd frontend
       - run: npm install
+      - run: npm install webpack
       - run: pwd
       # This triggers `gatsby build` script in "package.json"
       - run: npm run build
@@ -92,7 +94,9 @@ jobs:
 
         # Install all dependencies
         #- run: cd frontend
+      - run: cd ..
       - run: npm install
+      - run: npm install webpack
       - run: pwd
       # This triggers `gatsby build` script in "package.json"
       - run: npm run build
@@ -128,6 +132,7 @@ jobs:
         # Install all dependencies
       - run: cd frontend
       - run: npm install
+      - run: npm install webpack
       - run: pwd
       # This triggers `gatsby build` script in "package.json"
       - run: npm run build
@@ -152,6 +157,7 @@ jobs:
         # Install all dependencies
       - run: cd ..
       - run: npm install
+      - run: npm install webpack
       - run: pwd
       # This triggers `gatsby build` script in "package.json"
       - run: npm run build
