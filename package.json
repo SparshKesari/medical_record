@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.11.8",
     "nodemon": "^2.0.6",
-    "webpack": "^5.12.3"
+    "webpack": "4.44.2"
   },
   "devDependencies": {
     "webpack-cli": "^4.3.1"
