@@ -33,8 +33,6 @@ jobs:
         # Install all dependencies
       - run: cd frontend
       - run: npm install
-      - run: npm install webpack
-      - run: npm install webpack-cli
       - run: pwd    
       # This triggers `gatsby build` script in "package.json"
       - run: npm run build
@@ -69,8 +67,6 @@ jobs:
         # Install all dependencies
       - run: cd frontend
       - run: npm install
-      - run: npm install webpack
-      - run: npm install webpack-cli
       - run: pwd
       # This triggers `gatsby build` script in "package.json"
       - run: npm run build
@@ -98,11 +94,9 @@ jobs:
         #- run: cd frontend
       - run: cd ..
       - run: npm install
-      - run: npm install webpack
-      - run: npm install webpack-cli
       - run: pwd
       # This triggers `gatsby build` script in "package.json"
-      - run: npm run build
+      - run: npm start
 
       - name: Deploy draft to Netlify on push
         uses: South-Paw/action-netlify-deploy@v1.0.4
@@ -135,8 +129,6 @@ jobs:
         # Install all dependencies
       - run: cd frontend
       - run: npm install
-      - run: npm install webpack
-      - run: npm install webpack-cli
       - run: pwd
       # This triggers `gatsby build` script in "package.json"
       - run: npm run build
@@ -161,11 +153,9 @@ jobs:
         # Install all dependencies
       - run: cd ..
       - run: npm install
-      - run: npm install webpack
-      - run: npm install webpack-cli
       - run: pwd
       # This triggers `gatsby build` script in "package.json"
-      - run: npm run build
+      - run: npm start
 
       - name: Deploy production to Netlify
         uses: South-Paw/action-netlify-deploy@v1.0.4
