@@ -1,13 +1,16 @@
 import React from 'react';
 import Header from '../Component/Header';
 import '../Css/Header.css';
-
+import Navigation from '../Component/Navigation';
 
 function Landing_Page() {
     return (
-        <div className="landing_page">
-            <Header/>   
-        </div>
+        <>
+            <Navigation />
+            <div className="landing_page">
+                <Header/>   
+            </div>
+        </>
     )
 }
 

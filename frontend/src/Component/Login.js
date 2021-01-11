@@ -5,7 +5,7 @@ import img from '../Assets/Login_Signup-01.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Css/Login_Signup.css';
 import fire from '../fire.js';
-
+import Navigation from './Navigation';
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -34,6 +34,8 @@ function Login() {
 	  }
 
 	return (
+		<>
+		<Navigation />
 		<div className="login_up">
 		<div className="container login ">
 			<div className="row  justify-content-center align-items-center form-back border shadow">
@@ -73,6 +75,7 @@ function Login() {
 			</div>
 		</div>
 		</div>
+		</>
 	)
 }
 

@@ -6,7 +6,7 @@ import {useHistory} from 'react-router-dom';
 import '../Css/AddForm.css';
 import axios from 'axios';
 import fire from '../fire.js';
-
+import Navigation2 from './Navigation2';
 
 const url = 'http://localhost:8080/api/addform'
 
@@ -88,7 +88,9 @@ function AddForm() {
 	}
 
 	return (
-		<div className="add-form">
+		<>
+		<Navigation2 />
+			<div className="add-form">
 		<div className='container mt-3'>
 			<div className="layout">
 				<Form className="form-layout box-shadow" onSubmit={handleSubmit} >
@@ -153,6 +155,7 @@ function AddForm() {
 			</div>
 		</div>
 		</div>
+		</>
 
 	)
 }

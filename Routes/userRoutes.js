@@ -7,7 +7,6 @@ router.post('/signup', async (req,res) => {
         var name = req.body.name;
         var email = req.body.email;
         var number = req.body.number
-
         const user = new User({
             name: name,
             email: email,
@@ -41,6 +40,7 @@ router.post('/addform', async(req,res) => {
         try{
             await user.save()
             console.log('data pushed')
+            res.json({request, data: 'Success'});
         }catch(err) {
             console.log(err.message)
         }
@@ -53,7 +53,10 @@ router.post('/addform', async(req,res) => {
 router.post('/search', (req, res) => {
     const email = req.body.email;
     console.log(email);
-    User.findOne({email})
+    if(!email) {
+        return res.json({error: "email undefined"});
+    }
+    User.find({email})
         .then(data => {
             res.json(data);
         })
