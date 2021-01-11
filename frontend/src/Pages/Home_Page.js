@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Prescriptions from '../Component/Prescriptions.js'
 import fire from '../fire'
 import axios from 'axios';
+import Navigation2 from '../Component/Navigation2';
 const url = 'http://localhost:8080/api/search';
 
 function Home_Page() {
@@ -17,9 +18,12 @@ function Home_Page() {
         console.log('Use Effect');
     }, []);
     return (
-        <div className="">
-            <Prescriptions mediData = {mediData} />
-        </div>
+        <>
+            <Navigation2 />
+            <div className="">
+                <Prescriptions mediData = {mediData} />
+            </div>
+        </>
     )
 }
 

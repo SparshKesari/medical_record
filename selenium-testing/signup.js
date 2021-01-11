@@ -86,7 +86,7 @@ tabToOpen
         console.log("confirm password entered succesfully")
         let promiseSignInBtn = tab.findElement( 
             swd.By.css(".mb-3.btn.btn-primary") 
-        ); 
+            ); 
         return promiseSignInBtn; 
     }) 
     .then(function (signInBtn) { 

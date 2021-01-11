@@ -6,6 +6,7 @@ import img from '../Assets/Login_Signup-01.svg';
 import '../Css/Login_Signup.css';
 import Axios from 'axios';
 import fire from '../fire.js';
+import Navigation from './Navigation';
 const url = 'http://localhost:8080/api/signup';
 
 function Signup() {
@@ -39,6 +40,8 @@ function Signup() {
 		}
 
 	return (
+		<>
+		<Navigation />
 		<div className="signup_up">
 		<div className="container signup">
 			<div className="row justify-content-center border-class form-back border shadow">
@@ -61,7 +64,7 @@ function Signup() {
 								We'll never share your email with anyone else.
 		  					</Form.Text>
 						</Form.Group>
-						<Form.Group controlId="formBasicEmail">
+						<Form.Group controlId="formBasicNumber">
 							<Form.Label>Phone Number</Form.Label>
 							<Form.Control type="telnum" placeholder="Enter Number"
 								value={number} onChange={(e) => setNumber(e.target.value)} />
@@ -74,13 +77,13 @@ function Signup() {
 							<Form.Control type="password" placeholder="Password"
 								value={password} onChange={(e) => setPassword(e.target.value)} />
 						</Form.Group>
-						<Form.Group controlId="formBasicPassword">
+						<Form.Group controlId="formBasicCPassword">
 							<Form.Label>Confirm Password</Form.Label>
 							<Form.Control type="password" placeholder="Password"
 								value={cpassword} onChange={(e) => setCPassword(e.target.value)} />
 						</Form.Group>
 						<div className="d-flex justify-content-center" >
-						<Button variant="primary" className="mb-3" type="submit" enabled={!validateForm()}>
+						<Button controlId="formButton" variant="primary" className="mb-3" type="submit" enabled={!validateForm()}>
 							Submit
 						</Button>
 						</div>
@@ -90,6 +93,7 @@ function Signup() {
 			</div>
 		</div>
 		</div>
+		</>
 	)
 }
 

@@ -20,7 +20,6 @@ function App() {
   });
   return (
     <>
-      <NavBar/>
       <Switch>
           <Route exact path='/' component={Landing_Page}></Route>
           <Route exact path='/login' component={Login}></Route>
