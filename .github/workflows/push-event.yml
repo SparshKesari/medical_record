@@ -12,7 +12,6 @@ on:
         
     
 jobs:
-
   # This job will:
   #   * deploy a draft every time there is a pull request created or synchronized that is not on master branch
   #   * comment on that pull request with the deploy URL
@@ -31,6 +30,7 @@ jobs:
           node-version: "12.x"
           
         # Install all dependencies
+      - run: cd frontend
       - run: npm install
       - run: pwd    
       # This triggers `gatsby build` script in "package.json"
@@ -42,7 +42,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
-          build-dir: './build'
+          build-dir: 'frontend/build'
           draft: true
           comment-on-pull-request: true
     
@@ -64,10 +64,11 @@ jobs:
           node-version: "12.x"
           
         # Install all dependencies
-      - run: npm install
-      - run: pwd
+      - run: cd ./frontend && npm install
+      - run: cd ./frontend && pwd
       # This triggers `gatsby build` script in "package.json"
-      - run: npm run build
+      - run: cd ./frontend && npm install --save
+      - run: cd ./frontend && npm run build
 
       - name: Deploy draft to Netlify on push
         uses: South-Paw/action-netlify-deploy@v1.0.4
@@ -75,6 +76,32 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
+          build-dir: '.frontend/build'
+          draft: true
+          comment-on-commit: true
+ 
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      # Build steps for gatsby build
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+        # Install all dependencies
+        #- run: cd frontend
+      - run: npm install
+      - run: pwd
+      # This triggers `gatsby build` script in "package.json"
+      - run: npm start
+
+      - name: Deploy draft to Netlify on push
+        uses: South-Paw/action-netlify-deploy@v1.0.4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN_1 }}
+          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID_1 }}
           build-dir: './build'
           draft: true
           comment-on-commit: true
@@ -98,10 +125,10 @@ jobs:
           node-version: "12.x"
           
         # Install all dependencies
-      - run: npm install
-      - run: pwd
+      - run: cd ./frontend && npm install
+      - run: cd ./frontend && pwd
       # This triggers `gatsby build` script in "package.json"
-      - run: npm run build
+      - run: cd ./frontend && npm run build
 
       - name: Deploy production to Netlify
         uses: South-Paw/action-netlify-deploy@v1.0.4
@@ -109,5 +136,27 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
-          build-dir: './build'
+          build-dir: '.frontend/build'
+      
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      # Build steps for gatsby build
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
           
+        # Install all dependencies
+      - run: npm install
+      - run: pwd
+      # This triggers `gatsby build` script in "package.json"
+      - run: npm start
+
+      - name: Deploy production to Netlify
+        uses: South-Paw/action-netlify-deploy@v1.0.4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN_1 }}
+          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID_1 }}
+          build-dir: './build'
